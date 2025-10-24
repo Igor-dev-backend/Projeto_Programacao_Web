@@ -8,35 +8,47 @@
 <body>
 
     <header>
-        <h1>Bem vindos ao MenuExpress <p>Aqui voce faz os melhores pedidos da cidade</p></h1>
+        <!-- Logotipo e título -->
+        <a href="index1.html">
+            <img src="c:\Users\HP PROBOOK 645 G4\Downloads\Logo dinâmico da MenuExpress.png" alt="Logotipo da MenuExpress" width="300" height="200">
+        </a>
+        <h1>Bem-vindos ao MenuExpress</h1>
+        <h3>Aqui você faz os melhores pedidos da cidade</h3>
         
+        <!-- menu de navegação principal -->
         <nav>
-        <ul>
-         <li><a href="hcardapio">Cardapio</a></li>
-         <li><a href="hsobre">Sobre</a></li>
-         <li><a href="hcontato">Contato</a></li>
-         <li><a href="hpedidos">Pedidos</a></li>
-        </ul>
-    </nav>
+            <ul>
+                <li><a href="#hcardapio">Cardápio</a></li>
+                <li><a href="#hsobre">Sobre</a></li>
+                <li><a href="#hcontato">Contato</a></li>
+                <li><a href="#hpedidos">Pedidos</a></li>
+            </ul>
+        </nav>
     </header>
 
-   <main>
-      <section id="hcardapio">
-       <h2>Cardapio</h2>
-       <p>Confira nossas opções deliciosas disponíveis para entrega.</p>
-      </section>
+    <main>
+        <!-- section do Cardápio -->
+        <section id="hcardapio">
+            <h2>Cardápio</h2>
+            <p>Confira nossas opções deliciosas disponíveis para entrega.</p>
+        </section>
 
-      <section id="hsobre">
-       <h2>Sobre</h2>
-       <p>O MenuExpress foi criado para facilitar seus pedidos e conectar você aos melhores restaurantes da cidade.</p>
-      </section>
+        <!-- section do Sobre a empresa -->
+        <section id="hsobre">
+            <h2>Sobre</h2>
+            <p>O MenuExpress foi criado para facilitar seus pedidos e conectar você aos melhores restaurantes da cidade.</p>
+        </section>
 
-    <section id="hcontato">
-       <h2>Contato</h2>
-       <p>Entre em contato conosco pelo e-mail: <a href=>xxxxxxxx@xxxxxxxxxxx.com</a></p>
-       <p>Ou envie uma mensagem pelo formulário abaixo:</p>
+        <!-- section de Contato -->
+        <section id="hcontato">
+            <h2>Contato</h2>
+            <p>Entre em contato conosco pelo e-mail:
+                <a href="mailto:contato@menuexpress.com">contato@menuexpress.com</a>
+            </p>
+            <p>Ou envie uma mensagem pelo formulário abaixo:</p>
+
             <form action="#" method="post">
-                <label for="nome">Nome:</label>
+                <label for="nome">Nome:</label><br>
                 <input type="text" id="nome" name="nome" required><br><br>
 
                 <label for="mensagem">Mensagem:</label><br>
@@ -44,13 +56,14 @@
 
                 <button type="submit">Enviar</button>
             </form>
-    </section>
+        </section>
 
-    <section id="hpedidos">
-       <h2>pedidos</h2>
-       <p>Acompanhe seus pedidos e veja o status da entrega.</p>
-    </section>
-   </main>
+        <!-- section de Pedidos -->
+        <section id="hpedidos">
+            <h2>Pedidos</h2>
+            <p>Acompanhe seus pedidos e veja o status da entrega.</p>
+        </section>
+    </main>
     
     <footer>
         <p>&copy; 2025 MenuExpress. Todos os direitos reservados.</p>
