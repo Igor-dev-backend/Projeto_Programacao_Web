@@ -1,6 +1,12 @@
 <?php
 session_start();
 require_once 'config.php';
+
+// Se não estiver logado, redirecionar para tela de boas-vindas
+if (!isset($_SESSION['cliente_logado'])) {
+    header('Location: welcome.php');
+    exit;
+}
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
