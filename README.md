@@ -174,4 +174,4 @@ Este projeto é de código aberto e pode ser usado livremente para fins educacio
 
 ---
 
-**Desenvolvido com ❤️ para restaurantes modernos**
+**Desenvolvido por Francisco e Colaboradores**
