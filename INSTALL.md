@@ -16,7 +16,7 @@
 
 2. **Clone o repositório**
    ```bash
-   git clone https://github.com/SEU_USUARIO/menuexpress.git
+   git clone https://github.com/Igor-dev-backend/Projeto_Programacao_Web.git
    cd menuexpress
    ```
 
