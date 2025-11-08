@@ -1,9 +1,11 @@
 <?php
-session_start();
-require_once 'config.php';
+// Iniciar sessão sem depender do config.php inicialmente
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 // Se já estiver logado, redirecionar para o cardápio
-if (isset($_SESSION['cliente_logado'])) {
+if (isset($_SESSION['cliente_logado']) && $_SESSION['cliente_logado'] === true) {
     header('Location: index.php');
     exit;
 }
@@ -17,19 +19,20 @@ if (isset($_SESSION['cliente_logado'])) {
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
+        /* Estilos da página de boas-vindas - Identidade Visual MenuExpress */
         .welcome-container {
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF5733 0%, #FFC300 100%);
             padding: 2rem;
         }
         
         .welcome-card {
             background: white;
             border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 20px 40px rgba(44, 44, 44, 0.2);
             padding: 3rem;
             width: 100%;
             max-width: 500px;
@@ -40,21 +43,27 @@ if (isset($_SESSION['cliente_logado'])) {
             margin-bottom: 2rem;
         }
         
-        .welcome-header h1 {
-            color: #2c3e50;
-            margin-bottom: 0.5rem;
-            font-size: 2.5rem;
-            font-weight: 700;
+        .welcome-header .logo-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+        
+        .welcome-header .logo-container .logo {
+            justify-content: center;
         }
         
         .welcome-header .subtitle {
-            color: #666;
-            font-size: 1.2rem;
+            color: #2C2C2C;
+            font-size: 1.3rem;
+            font-weight: 600;
             margin-bottom: 1rem;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
         }
         
         .welcome-header .description {
-            color: #888;
+            color: #666;
             font-size: 1rem;
             line-height: 1.6;
         }
@@ -69,7 +78,7 @@ if (isset($_SESSION['cliente_logado'])) {
         .action-btn {
             padding: 1rem 2rem;
             border: none;
-            border-radius: 12px;
+            border-radius: 25px;
             font-size: 1.1rem;
             font-weight: 600;
             text-decoration: none;
@@ -79,53 +88,60 @@ if (isset($_SESSION['cliente_logado'])) {
             gap: 0.5rem;
             transition: all 0.3s ease;
             cursor: pointer;
+            font-family: 'Open Sans', 'Lato', sans-serif;
         }
         
         .btn-primary {
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: #FF5733;
             color: white;
+            box-shadow: 0 4px 8px rgba(255, 87, 51, 0.3);
         }
         
         .btn-primary:hover {
+            background: #E64A2E;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 6px 12px rgba(255, 87, 51, 0.4);
         }
         
         .btn-secondary {
-            background: linear-gradient(135deg, #e74c3c, #c0392b);
-            color: white;
+            background: #FFC300;
+            color: #2C2C2C;
+            box-shadow: 0 4px 8px rgba(255, 195, 0, 0.3);
         }
         
         .btn-secondary:hover {
+            background: #E6B000;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(231, 76, 60, 0.3);
+            box-shadow: 0 6px 12px rgba(255, 195, 0, 0.4);
         }
         
         .btn-outline {
             background: transparent;
-            color: #3498db;
-            border: 2px solid #3498db;
+            color: #FF5733;
+            border: 2px solid #FF5733;
         }
         
         .btn-outline:hover {
-            background: #3498db;
+            background: #FF5733;
             color: white;
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(52, 152, 219, 0.2);
+            box-shadow: 0 6px 12px rgba(255, 87, 51, 0.3);
         }
         
         .features {
             margin-top: 2rem;
             padding: 1.5rem;
-            background: #f8f9fa;
+            background: #F8F8F8;
             border-radius: 12px;
             text-align: left;
         }
         
         .features h3 {
-            color: #2c3e50;
+            color: #2C2C2C;
             margin-bottom: 1rem;
             text-align: center;
+            font-family: 'Poppins', 'Montserrat', sans-serif;
+            font-weight: 700;
         }
         
         .feature-list {
@@ -142,21 +158,22 @@ if (isset($_SESSION['cliente_logado'])) {
         }
         
         .feature-list i {
-            color: #27ae60;
+            color: #8CC63F;
             width: 20px;
         }
         
         .demo-info {
             margin-top: 1.5rem;
             padding: 1rem;
-            background: #e8f4fd;
+            background: #FFF3E0;
             border-radius: 8px;
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #2C2C2C;
+            border-left: 4px solid #FFC300;
         }
         
         .demo-info strong {
-            color: #3498db;
+            color: #FF5733;
         }
         
         @media (max-width: 480px) {
@@ -168,8 +185,8 @@ if (isset($_SESSION['cliente_logado'])) {
                 padding: 2rem;
             }
             
-            .welcome-header h1 {
-                font-size: 2rem;
+            .welcome-header .subtitle {
+                font-size: 1.1rem;
             }
             
             .welcome-actions {
@@ -187,10 +204,12 @@ if (isset($_SESSION['cliente_logado'])) {
     <div class="welcome-container">
         <div class="welcome-card">
             <div class="welcome-header">
-                <h1><i class="fas fa-utensils"></i> MenuExpress</h1>
-                <p class="subtitle">Bem-vindo ao nosso cardápio digital!</p>
+                <div class="logo-container">
+                    <?php include 'logo.php'; ?>
+                </div>
+                <p class="subtitle">Seu cardápio, na palma da mão</p>
                 <p class="description">
-                    Explore nossos pratos deliciosos, faça pedidos online e desfrute de uma experiência gastronômica única.
+                    Explore nossos pratos deliciosos e desfrute de uma experiência gastronômica moderna e rápida.
                 </p>
             </div>
             
@@ -228,27 +247,30 @@ if (isset($_SESSION['cliente_logado'])) {
     
     <script>
         // Adicionar efeitos de hover suaves
-        document.querySelectorAll('.action-btn').forEach(btn => {
-            btn.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-2px)';
-            });
-            
-            btn.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-        
-        // Animação de entrada
         document.addEventListener('DOMContentLoaded', function() {
-            const card = document.querySelector('.welcome-card');
-            card.style.opacity = '0';
-            card.style.transform = 'translateY(30px)';
+            const buttons = document.querySelectorAll('.action-btn');
+            buttons.forEach(btn => {
+                btn.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-2px)';
+                });
+                
+                btn.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                });
+            });
             
-            setTimeout(() => {
-                card.style.transition = 'all 0.6s ease';
-                card.style.opacity = '1';
-                card.style.transform = 'translateY(0)';
-            }, 100);
+            // Animação de entrada
+            const card = document.querySelector('.welcome-card');
+            if (card) {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                
+                setTimeout(function() {
+                    card.style.transition = 'all 0.6s ease';
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }, 100);
+            }
         });
     </script>
 </body>

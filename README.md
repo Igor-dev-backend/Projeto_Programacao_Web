@@ -1,177 +1,172 @@
-# MenuExpress - Cardápio Online
+# MenuExpress - Sistema de Cardápio Online
 
-Sistema de cardápio online desenvolvido com PHP, CSS, JavaScript e MySQL para gerenciamento de pratos de restaurante.
+Sistema simples de cardápio online desenvolvido com PHP, MySQL, HTML, CSS e JavaScript.
 
-## 🚀 Características
+## 📋 Sobre o Projeto
 
-- **Interface Responsiva**: Design moderno e adaptável para todos os dispositivos
-- **Painel Administrativo**: Gerenciamento completo de pratos (CRUD)
-- **Sistema de Autenticação**: Login seguro para administradores
-- **Validações JavaScript**: Validação em tempo real dos formulários
-- **Banco de Dados MySQL**: Armazenamento seguro dos dados
+Este é um sistema de cardápio online para restaurantes, desenvolvido como projeto acadêmico. Permite que clientes visualizem o cardápio, façam cadastro e login no sistema.
 
-## 📋 Pré-requisitos
+## 🚀 Tecnologias Utilizadas
 
-- XAMPP (Apache + MySQL)
-- PHP 7.4 ou superior
-- MySQL 5.7 ou superior
-- Navegador web moderno
+- **PHP** - Linguagem de programação do servidor
+- **MySQL** - Banco de dados
+- **HTML/CSS** - Interface do usuário
+- **JavaScript** - Interatividade
+- **XAMPP** - Servidor local (Apache + MySQL)
 
-## 🛠️ Instalação
+## 📦 Pré-requisitos
 
-### 1. Configurar o Ambiente
+Antes de começar, você precisa ter instalado:
 
-1. Instale o XAMPP: https://www.apachefriends.org/pt_br/index.html
-2. Inicie o Apache e MySQL no painel de controle do XAMPP
-3. Acesse o phpMyAdmin: http://localhost/phpmyadmin
+1. **XAMPP** (ou similar: WAMP, MAMP)
+   - Baixe em: https://www.apachefriends.org/pt_br/index.html
+   - Instale e inicie o Apache e MySQL
 
-### 2. Criar o Banco de Dados
+## 🛠️ Como Instalar
 
-1. No phpMyAdmin, clique em "Novo"
-2. Crie um banco chamado: `menuexpress`
-3. Execute o seguinte SQL para criar a tabela:
+### Passo 1: Configurar o XAMPP
 
-```sql
-CREATE TABLE pratos (
-    id INT(11) AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    descricao TEXT NOT NULL,
-    preco DECIMAL(10,2) NOT NULL,
-    imagem VARCHAR(255) DEFAULT NULL
-);
+1. Instale o XAMPP
+2. Inicie o **Apache** e o **MySQL** no painel de controle
+3. Abra o navegador e acesse: `http://localhost/phpmyadmin`
+
+### Passo 2: Criar o Banco de Dados
+
+1. No phpMyAdmin, clique em "Novo" para criar um banco de dados
+2. Nome do banco: `menuexpress`
+3. Clique em "Criar"
+4. Na aba "SQL", cole e execute o código do arquivo `database.sql`
+
+### Passo 3: Configurar o Projeto
+
+1. Copie a pasta do projeto para: `C:\xampp\htdocs\Projeto_Programacao_Web\`
+2. Abra o arquivo `config.php` e verifique as configurações:
+
+```php
+$host = 'localhost';        // Servidor do MySQL
+$dbname = 'menuexpress';    // Nome do banco de dados
+$username = 'root';         // Usuário do MySQL
+$password = '';             // Senha do MySQL (vazio por padrão)
 ```
 
-### 3. Configurar o Projeto
+### Passo 4: Acessar o Sistema
 
-1. Copie a pasta `menuexpress` para `C:\xampp\htdocs\`
-2. Acesse: http://localhost/menuexpress/
-
-## 🎯 Como Usar
-
-### Acesso Público
-- **URL**: http://localhost/menuexpress/
-- Visualize o cardápio completo
-- Interface responsiva para todos os dispositivos
-
-### Painel Administrativo
-- **URL**: http://localhost/menuexpress/admin/
-- **Usuário**: admin
-- **Senha**: admin123
-
-#### Funcionalidades do Admin:
-- ✅ Adicionar novos pratos
-- ✅ Editar pratos existentes
-- ✅ Excluir pratos
-- ✅ Visualizar lista completa
-- ✅ Validação de formulários
-- ✅ Upload de imagens (URL)
-- ✅ **Gerenciar clientes** (novo!)
-- ✅ **Redefinir senhas** (novo!)
-- ✅ **Buscar e filtrar clientes** (novo!)
-- ✅ **Visualizar detalhes dos clientes** (novo!)
+1. Abra o navegador
+2. Acesse: `http://localhost/Projeto_Programacao_Web/welcome.php`
 
 ## 📁 Estrutura do Projeto
 
 ```
-menuexpress/
-├── index.php              # Página principal (cardápio público)
+Projeto_Programacao_Web/
+├── index.php              # Página principal (cardápio)
+├── welcome.php            # Página de boas-vindas
+├── login.php              # Página de login
+├── cadastro.php           # Página de cadastro
+├── logout.php             # Logout do sistema
+├── perfil.php             # Perfil do usuário
+├── menu-publico.php       # Cardápio público (sem login)
 ├── config.php             # Configurações do banco de dados
+├── database.sql           # Script para criar o banco de dados
 ├── assets/
 │   ├── css/
-│   │   └── style.css      # Estilos principais
+│   │   └── style.css      # Estilos do site
 │   └── js/
-│       └── script.js      # JavaScript principal
-├── admin/
-│   ├── index.php          # Painel administrativo
-│   ├── clientes.php       # Gerenciar clientes
-│   ├── login.php          # Página de login
-│   ├── logout.php         # Logout
-│   └── assets/
-│       ├── css/
-│       │   └── admin.css  # Estilos do admin
-│       └── js/
-│           └── admin.js   # JavaScript do admin
-└── README.md              # Este arquivo
+│       └── script.js      # JavaScript do site
+└── admin/
+    ├── index.php          # Painel administrativo
+    ├── login.php          # Login do admin
+    └── clientes.php       # Gerenciar clientes
 ```
 
-## 🎨 Personalização
+## 👤 Usuários do Sistema
 
-### Cores e Estilos
-Edite o arquivo `assets/css/style.css` para personalizar:
-- Cores do tema
-- Fontes
-- Layout responsivo
-- Animações
+### Cliente (Usuário Normal)
 
-### Configurações do Banco
-Edite o arquivo `config.php` para alterar:
-- Credenciais do banco de dados
-- Configurações de conexão
+- **Cadastro**: Qualquer pessoa pode se cadastrar
+- **Login**: Email e senha
+- **Funcionalidades**: Ver cardápio, editar perfil
 
-## 🔒 Segurança
+### Administrador
 
-### Credenciais Padrão
-- **Usuário**: admin
-- **Senha**: admin123
+- **URL**: `http://localhost/Projeto_Programacao_Web/admin/`
+- **Usuário padrão**: `admin`
+- **Senha padrão**: `admin123`
+- **Funcionalidades**: Gerenciar pratos, gerenciar clientes
 
-⚠️ **IMPORTANTE**: Altere as credenciais padrão em produção!
+⚠️ **IMPORTANTE**: Altere a senha do administrador em produção!
 
-### Recomendações para Produção:
-1. Use senhas fortes e únicas
-2. Implemente hash de senhas (password_hash)
-3. Configure HTTPS
-4. Valide e sanitize todas as entradas
-5. Use prepared statements (já implementado)
+## 🎯 Como Usar
 
-## 🐛 Solução de Problemas
+### Para Clientes
 
-### Erro de Conexão com Banco
+1. Acesse a página de boas-vindas
+2. Clique em "Criar nova conta" para se cadastrar
+3. Faça login com seu email e senha
+4. Visualize o cardápio completo
+
+### Para Administradores
+
+1. Acesse: `http://localhost/Projeto_Programacao_Web/admin/`
+2. Faça login com as credenciais do admin
+3. Adicione, edite ou remova pratos do cardápio
+4. Gerencie os clientes cadastrados
+
+## 📝 Banco de Dados
+
+O sistema utiliza as seguintes tabelas:
+
+- **pratos** - Armazena os pratos do cardápio
+- **usuarios** - Armazena os usuários (clientes e admin)
+- **admins** - Armazena os administradores
+
+## 🔧 Solução de Problemas
+
+### Erro de Conexão com o Banco de Dados
+
 - Verifique se o MySQL está rodando no XAMPP
-- Confirme as credenciais no `config.php`
-- Verifique se o banco `menuexpress` existe
+- Confirme se o banco `menuexpress` existe
+- Verifique as configurações no arquivo `config.php`
 
 ### Página não Carrega
+
+- Verifique se o Apache está rodando no XAMPP
+- Confirme se os arquivos estão na pasta correta: `C:\xampp\htdocs\Projeto_Programacao_Web\`
+- Tente acessar: `http://localhost/Projeto_Programacao_Web/welcome.php`
+
+### Erro 404 (Página não encontrada)
+
+- Verifique se está usando a URL correta
+- Confirme o nome da pasta do projeto
 - Verifique se o Apache está rodando
-- Confirme se os arquivos estão em `C:\xampp\htdocs\menuexpress\`
-- Acesse: http://localhost/menuexpress/
 
-### Problemas de Permissão
-- Verifique as permissões da pasta
-- No Windows, execute como administrador se necessário
+## 📚 Conceitos Aprendidos
 
-## 📱 Responsividade
+Este projeto aborda os seguintes conceitos:
 
-O sistema é totalmente responsivo e funciona em:
-- 📱 Smartphones
-- 📱 Tablets
-- 💻 Desktops
-- 🖥️ Telas grandes
+- **Sessões PHP** - Controle de usuários logados
+- **Prepared Statements** - Segurança contra SQL Injection
+- **Password Hash** - Criptografia de senhas
+- **PDO** - Conexão com banco de dados
+- **CRUD** - Create, Read, Update, Delete
+- **Responsive Design** - Interface adaptável
+- **Validação de Formulários** - PHP e JavaScript
 
-## 🚀 Próximos Passos
+## 🎓 Para Estudantes
 
-### Melhorias Sugeridas:
-- [ ] Upload de imagens locais
-- [ ] Categorias de pratos
-- [ ] Sistema de pedidos
-- [ ] Relatórios de vendas
-- [ ] API REST
-- [ ] Sistema de usuários múltiplos
-- [ ] Backup automático
-- [ ] Cache de imagens
-- [ ] **Histórico de alterações de senha** (implementado!)
-- [ ] **Exportar dados de clientes** (implementado!)
+Este projeto foi desenvolvido para ser simples e didático, ideal para alunos de segundo período. O código contém comentários explicativos para facilitar o aprendizado.
 
-## 📞 Suporte
+### Dicas de Estudo
 
-Para dúvidas ou problemas:
-1. Verifique este README
-2. Consulte os comentários no código
-3. Teste em ambiente local primeiro
+1. Leia os comentários no código
+2. Entenda o fluxo de navegação entre as páginas
+3. Estude como funciona a sessão PHP
+4. Analise as queries SQL
+5. Teste e modifique o código para aprender
 
 ## 📄 Licença
 
-Este projeto é de código aberto e pode ser usado livremente para fins educacionais e comerciais.
+Este projeto é de código aberto e pode ser usado livremente para fins educacionais.
 
 ---
 
-**Desenvolvido por Francisco e Colaboradores**
+**Desenvolvido para fins acadêmicos**

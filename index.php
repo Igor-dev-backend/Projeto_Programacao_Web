@@ -1,8 +1,16 @@
 <?php
+// ============================================
+// PÁGINA PRINCIPAL - CARDÁPIO DO RESTAURANTE
+// ============================================
+
+// Iniciar a sessão para verificar se o usuário está logado
 session_start();
+
+// Conectar ao banco de dados
 require_once 'config.php';
 
-// Se não estiver logado, redirecionar para tela de boas-vindas
+// Verificar se o usuário está logado
+// Se não estiver, redireciona para a página de boas-vindas
 if (!isset($_SESSION['cliente_logado'])) {
     header('Location: welcome.php');
     exit;
@@ -22,8 +30,8 @@ if (!isset($_SESSION['cliente_logado'])) {
         <div class="container">
             <div class="header-content">
                 <div class="header-left">
-                    <h1><i class="fas fa-utensils"></i> MenuExpress</h1>
-                    <p>Cardápio Digital do Nosso Restaurante</p>
+                    <?php include 'logo.php'; ?>
+                    <p style="margin-top: 0.5rem;">Seu cardápio, na palma da mão</p>
                 </div>
                 <div class="header-right">
                     <?php if (isset($_SESSION['cliente_logado'])): ?>
@@ -57,10 +65,15 @@ if (!isset($_SESSION['cliente_logado'])) {
         <div class="container">
             <div class="menu-grid">
                 <?php
+                // Buscar todos os pratos do banco de dados
                 try {
+                    // Consulta SQL para buscar todos os pratos ordenados por nome
                     $stmt = $pdo->query("SELECT * FROM pratos ORDER BY nome ASC");
+                    
+                    // Buscar todos os resultados
                     $pratos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                     
+                    // Verificar se há pratos cadastrados
                     if (empty($pratos)) {
                         echo '<div class="no-items">';
                         echo '<i class="fas fa-utensils"></i>';
@@ -68,15 +81,21 @@ if (!isset($_SESSION['cliente_logado'])) {
                         echo '<p>Volte em breve para ver nosso cardápio!</p>';
                         echo '</div>';
                     } else {
+                        // Loop para exibir cada prato
                         foreach ($pratos as $prato) {
                             echo '<div class="menu-item">';
+                            
+                            // Exibir imagem do prato (se houver)
                             echo '<div class="item-image">';
                             if (!empty($prato['imagem'])) {
+                                // htmlspecialchars previne ataques XSS
                                 echo '<img src="' . htmlspecialchars($prato['imagem']) . '" alt="' . htmlspecialchars($prato['nome']) . '">';
                             } else {
                                 echo '<div class="no-image"><i class="fas fa-image"></i></div>';
                             }
                             echo '</div>';
+                            
+                            // Exibir informações do prato
                             echo '<div class="item-content">';
                             echo '<h3>' . htmlspecialchars($prato['nome']) . '</h3>';
                             echo '<p class="description">' . htmlspecialchars($prato['descricao']) . '</p>';
@@ -86,7 +105,8 @@ if (!isset($_SESSION['cliente_logado'])) {
                         }
                     }
                 } catch (PDOException $e) {
-                    echo '<div class="error">Erro ao carregar o cardápio: ' . $e->getMessage() . '</div>';
+                    // Se houver erro, mostrar mensagem amigável
+                    echo '<div class="error">Erro ao carregar o cardápio: ' . htmlspecialchars($e->getMessage()) . '</div>';
                 }
                 ?>
             </div>

@@ -1,29 +1,42 @@
 <?php
+// ============================================
+// PÁGINA DE PERFIL DO USUÁRIO
+// ============================================
+
+// Iniciar sessão
 session_start();
+
+// Conectar ao banco de dados
 require_once 'config.php';
 
-// Verificar se está logado
+// Verificar se o usuário está logado
+// Se não estiver, redirecionar para a página de login
 if (!isset($_SESSION['cliente_logado'])) {
     header('Location: login.php');
     exit;
 }
 
+// Variáveis para mensagens
 $sucesso = '';
 $erro = '';
 
-// Processar atualização do perfil
+// Processar atualização do perfil quando o formulário for enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Pegar dados do formulário
     $nome = trim($_POST['nome'] ?? '');
     $telefone = trim($_POST['telefone'] ?? '');
     $endereco = trim($_POST['endereco'] ?? '');
     
+    // Validar se o nome foi preenchido
     if (empty($nome)) {
         $erro = 'Nome é obrigatório!';
     } else {
         try {
+            // Atualizar dados do usuário no banco de dados
             $stmt = $pdo->prepare("UPDATE usuarios SET nome = ?, telefone = ?, endereco = ? WHERE id = ?");
             $stmt->execute([$nome, $telefone, $endereco, $_SESSION['cliente_id']]);
             
+            // Atualizar também na sessão
             $_SESSION['cliente_nome'] = $nome;
             $sucesso = 'Perfil atualizado com sucesso!';
         } catch (PDOException $e) {
@@ -32,7 +45,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-// Buscar dados do usuário
+// Buscar dados atualizados do usuário no banco de dados
 try {
     $stmt = $pdo->prepare("SELECT * FROM usuarios WHERE id = ?");
     $stmt->execute([$_SESSION['cliente_id']]);

@@ -1,5 +1,13 @@
 <?php
+// ============================================
+// PÁGINA DE CARDÁPIO PÚBLICO
+// ============================================
+// Esta página permite ver o cardápio sem fazer login
+
+// Iniciar sessão (para verificar se está logado, mas não é obrigatório)
 session_start();
+
+// Conectar ao banco de dados para buscar os pratos
 require_once 'config.php';
 ?>
 <!DOCTYPE html>
@@ -12,7 +20,7 @@ require_once 'config.php';
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
         .public-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF5733 0%, #FFC300 100%);
             color: white;
             padding: 2rem 0;
             text-align: center;
@@ -31,7 +39,7 @@ require_once 'config.php';
         }
         
         .auth-banner {
-            background: #3498db;
+            background: #FF5733;
             color: white;
             padding: 1rem;
             text-align: center;
@@ -76,22 +84,22 @@ require_once 'config.php';
         }
         
         .btn-login {
-            background: #27ae60;
+            background: #8CC63F;
             color: white;
         }
         
         .btn-login:hover {
-            background: #229954;
+            background: #7AB336;
             transform: translateY(-2px);
         }
         
         .btn-register {
-            background: #e74c3c;
-            color: white;
+            background: #FFC300;
+            color: #2C2C2C;
         }
         
         .btn-register:hover {
-            background: #c0392b;
+            background: #E6B000;
             transform: translateY(-2px);
         }
         
@@ -140,8 +148,19 @@ require_once 'config.php';
 <body>
     <header class="public-header">
         <div class="container">
-            <h1><i class="fas fa-utensils"></i> MenuExpress</h1>
-            <p>Cardápio Digital do Nosso Restaurante</p>
+            <div style="display: flex; justify-content: center; margin-bottom: 1rem; flex-direction: column; align-items: center;">
+                <div style="color: white;">
+                    <div style="display: inline-flex; align-items: center; gap: 0.75rem;">
+                        <div style="width: 50px; height: 50px; background-color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 8px rgba(0,0,0,0.2); position: relative;">
+                            <i class="fas fa-utensils" style="color: #FF5733; font-size: 24px;"></i>
+                        </div>
+                        <div style="display: flex; flex-direction: row; align-items: baseline; gap: 0.25rem; line-height: 1;">
+                            <span style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 700; font-size: 1.8rem; color: white; letter-spacing: -0.5px;">Menu</span><span style="font-family: 'Poppins', 'Montserrat', sans-serif; font-weight: 700; font-size: 1.8rem; color: white; letter-spacing: -0.5px;">Express</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <p style="color: white; font-size: 1.2rem; margin: 0; font-weight: 500;">Seu cardápio, na palma da mão</p>
         </div>
     </header>
 
@@ -177,10 +196,13 @@ require_once 'config.php';
 
         <div class="menu-grid">
             <?php
+            // Buscar todos os pratos do banco de dados
             try {
+                // Consulta SQL para buscar todos os pratos
                 $stmt = $pdo->query("SELECT * FROM pratos ORDER BY nome ASC");
                 $pratos = $stmt->fetchAll(PDO::FETCH_ASSOC);
                 
+                // Verificar se há pratos cadastrados
                 if (empty($pratos)) {
                     echo '<div class="no-items">';
                     echo '<i class="fas fa-utensils"></i>';
@@ -188,8 +210,11 @@ require_once 'config.php';
                     echo '<p>Volte em breve para ver nosso cardápio!</p>';
                     echo '</div>';
                 } else {
+                    // Loop para exibir cada prato
                     foreach ($pratos as $prato) {
                         echo '<div class="menu-item">';
+                        
+                        // Exibir imagem do prato
                         echo '<div class="item-image">';
                         if (!empty($prato['imagem'])) {
                             echo '<img src="' . htmlspecialchars($prato['imagem']) . '" alt="' . htmlspecialchars($prato['nome']) . '">';
@@ -197,6 +222,8 @@ require_once 'config.php';
                             echo '<div class="no-image"><i class="fas fa-image"></i></div>';
                         }
                         echo '</div>';
+                        
+                        // Exibir informações do prato
                         echo '<div class="item-content">';
                         echo '<h3>' . htmlspecialchars($prato['nome']) . '</h3>';
                         echo '<p class="description">' . htmlspecialchars($prato['descricao']) . '</p>';
@@ -206,6 +233,7 @@ require_once 'config.php';
                     }
                 }
             } catch (PDOException $e) {
+                // Se houver erro, mostrar mensagem
                 echo '<div class="error">Erro ao carregar o cardápio: ' . $e->getMessage() . '</div>';
             }
             ?>
