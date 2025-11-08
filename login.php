@@ -1,34 +1,49 @@
 <?php
+// ============================================
+// PÁGINA DE LOGIN
+// ============================================
+
+// Iniciar sessão para armazenar dados do usuário logado
 session_start();
+
+// Conectar ao banco de dados
 require_once 'config.php';
 
-// Se já estiver logado, redirecionar
+// Se o usuário já estiver logado, redirecionar para a página principal
 if (isset($_SESSION['cliente_logado'])) {
     header('Location: index.php');
     exit;
 }
 
+// Variável para armazenar mensagens de erro
 $erro = '';
 
-// Processar login
+// Verificar se o formulário foi enviado (método POST)
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    $email = trim($_POST['email'] ?? '');
+    // Pegar dados do formulário
+    $email = trim($_POST['email'] ?? '');  // trim remove espaços em branco
     $senha = $_POST['senha'] ?? '';
     
+    // Validar se os campos não estão vazios
     if (empty($email) || empty($senha)) {
         $erro = 'Preencha todos os campos!';
     } else {
         try {
+            // Buscar usuário no banco de dados pelo email
+            // Usamos prepared statement para evitar SQL injection
             $stmt = $pdo->prepare("SELECT id, nome, email, senha FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
             $usuario = $stmt->fetch();
             
+            // Verificar se o usuário existe e se a senha está correta
             if ($usuario && password_verify($senha, $usuario['senha'])) {
+                // Login bem-sucedido! Armazenar dados na sessão
                 $_SESSION['cliente_logado'] = true;
                 $_SESSION['cliente_id'] = $usuario['id'];
                 $_SESSION['cliente_nome'] = $usuario['nome'];
                 $_SESSION['cliente_email'] = $usuario['email'];
                 
+                // Redirecionar para a página principal
                 header('Location: index.php');
                 exit;
             } else {
@@ -54,7 +69,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF5733 0%, #FFC300 100%);
             padding: 2rem;
         }
         
@@ -116,20 +131,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .auth-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: #FF5733;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(255, 87, 51, 0.3);
         }
         
         .auth-btn:hover {
+            background: #E64A2E;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 6px 12px rgba(255, 87, 51, 0.4);
         }
         
         .auth-links {
@@ -138,14 +155,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         
         .auth-links a {
-            color: #3498db;
+            color: #FF5733;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.3s ease;
         }
         
         .auth-links a:hover {
-            color: #2980b9;
+            color: #E64A2E;
         }
         
         .error-message {
@@ -174,14 +191,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .demo-credentials {
             margin-top: 2rem;
             padding: 1rem;
-            background: #e8f4fd;
+            background: #FFF3E0;
             border-radius: 8px;
             font-size: 0.9rem;
-            color: #2c3e50;
+            color: #2C2C2C;
+            border-left: 4px solid #FFC300;
         }
         
         .demo-credentials strong {
-            color: #3498db;
+            color: #FF5733;
         }
         
         @media (max-width: 480px) {
@@ -212,6 +230,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                    <?php 
+                    $logo_size = 'compact';
+                    include 'logo.php'; 
+                    ?>
+                </div>
                 <h1><i class="fas fa-sign-in-alt"></i> Login</h1>
                 <p>Entre na sua conta MenuExpress</p>
             </div>

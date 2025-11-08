@@ -1,25 +1,34 @@
 <?php
+// ============================================
+// PÁGINA DE CADASTRO
+// ============================================
+
+// Iniciar sessão
 session_start();
+
+// Conectar ao banco de dados
 require_once 'config.php';
 
-// Se já estiver logado, redirecionar
+// Se o usuário já estiver logado, redirecionar
 if (isset($_SESSION['cliente_logado'])) {
     header('Location: index.php');
     exit;
 }
 
+// Variáveis para mensagens
 $erro = '';
 $sucesso = '';
 
-// Processar cadastro
+// Verificar se o formulário foi enviado
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // Pegar dados do formulário
     $nome = trim($_POST['nome'] ?? '');
     $email = trim($_POST['email'] ?? '');
     $senha = $_POST['senha'] ?? '';
     $confirmar_senha = $_POST['confirmar_senha'] ?? '';
     $telefone = trim($_POST['telefone'] ?? '');
     
-    // Validações
+    // Validações básicas
     if (empty($nome) || empty($email) || empty($senha)) {
         $erro = 'Preencha todos os campos obrigatórios!';
     } elseif ($senha !== $confirmar_senha) {
@@ -30,15 +39,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $erro = 'Email inválido!';
     } else {
         try {
-            // Verificar se email já existe
+            // Verificar se o email já está cadastrado
             $stmt = $pdo->prepare("SELECT id FROM usuarios WHERE email = ?");
             $stmt->execute([$email]);
             
             if ($stmt->rowCount() > 0) {
                 $erro = 'Este email já está cadastrado!';
             } else {
-                // Cadastrar usuário
+                // Criptografar a senha antes de salvar no banco
                 $senhaHash = password_hash($senha, PASSWORD_DEFAULT);
+                
+                // Inserir novo usuário no banco de dados
                 $stmt = $pdo->prepare("INSERT INTO usuarios (nome, email, senha, telefone) VALUES (?, ?, ?, ?)");
                 $stmt->execute([$nome, $email, $senhaHash, $telefone]);
                 
@@ -64,7 +75,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             display: flex;
             align-items: center;
             justify-content: center;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #FF5733 0%, #FFC300 100%);
             padding: 2rem;
         }
         
@@ -132,20 +143,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .auth-btn {
             width: 100%;
             padding: 1rem;
-            background: linear-gradient(135deg, #3498db, #2980b9);
+            background: #FF5733;
             color: white;
             border: none;
-            border-radius: 8px;
+            border-radius: 25px;
             font-size: 1.1rem;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             margin-bottom: 1rem;
+            box-shadow: 0 4px 8px rgba(255, 87, 51, 0.3);
         }
         
         .auth-btn:hover {
+            background: #E64A2E;
             transform: translateY(-2px);
-            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+            box-shadow: 0 6px 12px rgba(255, 87, 51, 0.4);
         }
         
         .auth-links {
@@ -154,14 +167,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         
         .auth-links a {
-            color: #3498db;
+            color: #FF5733;
             text-decoration: none;
-            font-weight: 500;
+            font-weight: 600;
             transition: color 0.3s ease;
         }
         
         .auth-links a:hover {
-            color: #2980b9;
+            color: #E64A2E;
         }
         
         .error-message {
@@ -228,6 +241,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <div class="auth-container">
         <div class="auth-card">
             <div class="auth-header">
+                <div style="display: flex; justify-content: center; margin-bottom: 1rem;">
+                    <?php 
+                    $logo_size = 'compact';
+                    include 'logo.php'; 
+                    ?>
+                </div>
                 <h1><i class="fas fa-user-plus"></i> Cadastro</h1>
                 <p>Crie sua conta no MenuExpress</p>
             </div>
