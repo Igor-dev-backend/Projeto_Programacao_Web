@@ -1,5 +1,5 @@
 <?php
-
+    echo "<script>alert('Seja Bem vindo a nossa pagina Sobre Nós');</script>";
 ?>
 <!DOCTYPE html>
 <html lang="pt-BR">
@@ -13,6 +13,7 @@
             margin: 0; /* Remove margens padrão do navegador */
             color: #333; /* Cor do texto principal */
             background-image: url('imagem_de_fundo.png');
+            background-size: 250px 200px;
         }
 
         /* Estilos para o cabeçalho principal */
@@ -64,6 +65,7 @@
             margin-bottom: 30px;
             border-bottom: 2px dashed #ccc; /* Linha tracejada para separar */
             padding-bottom: 20px;
+            background-color: #F8F8F8;
         }
 
         /* Estilos para o título da seção */
