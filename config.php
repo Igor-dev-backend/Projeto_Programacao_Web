@@ -1,14 +1,29 @@
 <?php
+// ============================================
+// CONFIGURAÇÃO DO BANCO DE DADOS
+// ============================================
+// Altere estas informações conforme seu ambiente
 
-define("DB_HOST", "localhost");
-define("DB_USER", "root"); // Usuário padrão do XAMPP
-define("DB_PASS", "");     // Senha padrão do XAMPP
-define("DB_NAME", "meu_projeto_contatos");
+$host = 'localhost';        // Servidor do MySQL (geralmente 'localhost')
+$dbname = 'menuexpress';    // Nome do banco de dados
+$username = 'root';         // Usuário do MySQL
+$password = '';             // Senha do MySQL (vazio por padrão no XAMPP)
 
+// ============================================
+// CONEXÃO COM O BANCO DE DADOS
+// ============================================
 try {
-    $pdo = new PDO("mysql:host=" . DB_HOST . ";dbname=" . DB_NAME . ";charset=utf8", DB_USER, DB_PASS);
+    // Criar conexão usando PDO
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $username, $password);
+    
+    // Configurar para mostrar erros
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    // echo "Conexão bem-sucedida!"; // Descomente para testar a conexão
+    
+    // Configurar para retornar resultados como array associativo
+    $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
+    
 } catch (PDOException $e) {
-    die("Erro de Conexão com o Banco de Dados: " . $e->getMessage());
+    // Se houver erro na conexão, mostra mensagem amigável
+    die("Erro ao conectar com o banco de dados: " . $e->getMessage());
 }
+?>

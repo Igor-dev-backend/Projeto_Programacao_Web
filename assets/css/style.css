@@ -1,0 +1,601 @@
+/* ============================================
+   IDENTIDADE VISUAL MENUEXPRESS
+   ============================================ */
+
+/* Importar fontes do Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@700;800&family=Montserrat:wght@800;900&family=Open+Sans:wght@400;600&family=Lato:wght@400;700&display=swap');
+
+/* Reset e configurações básicas */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Variáveis de cores - Identidade Visual MenuExpress */
+:root {
+    --cor-primaria: #FF5733;      /* Vermelho-alaranjado - Energia e apetite */
+    --cor-secundaria: #FFC300;    /* Amarelo-dourado - Alegria e destaque */
+    --cor-neutra: #2C2C2C;        /* Cinza-escuro - Sofisticação */
+    --cor-fundo: #F8F8F8;         /* Cinza-claro - Limpeza */
+    --cor-complementar: #8CC63F;  /* Verde-limão - Frescor */
+    --cor-texto: #2C2C2C;         /* Cor do texto principal */
+    --cor-texto-claro: #666;      /* Cor do texto secundário */
+}
+
+body {
+    font-family: 'Open Sans', 'Lato', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    line-height: 1.6;
+    color: var(--cor-texto);
+    background-color: var(--cor-fundo);
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+
+/* ============================================
+   LOGO MENUEXPRESS
+   ============================================ */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    text-decoration: none;
+    transition: transform 0.3s ease;
+    flex-wrap: nowrap;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-icon-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 0;
+    height: 50px;
+}
+
+/* Linhas de movimento à esquerda do círculo (efeito de velocidade) - 3 linhas laranjas */
+.logo-line {
+    position: absolute;
+    background-color: #FF5733;
+    border-radius: 2px;
+    left: 0;
+    z-index: 0;
+}
+
+.logo-line-1 {
+    width: 12px;
+    height: 3px;
+    left: -18px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-line-2 {
+    width: 10px;
+    height: 3px;
+    left: -28px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-line-3 {
+    width: 8px;
+    height: 3px;
+    left: -36px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.logo-icon {
+    width: 50px;
+    height: 50px;
+    background-color: #FF5733;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 4px 8px rgba(255, 87, 51, 0.3);
+    flex-shrink: 0;
+    z-index: 1;
+}
+
+.logo-icon i {
+    color: white;
+    font-size: 24px;
+}
+
+.logo-text {
+    display: flex;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0;
+    line-height: 1;
+    white-space: nowrap;
+}
+
+.logo-text .logo-menu {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #2C2C2C;
+    letter-spacing: -0.5px;
+    display: inline-block;
+}
+
+.logo-text .logo-express {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.8rem;
+    color: #FF5733;
+    letter-spacing: -0.5px;
+    display: inline-block;
+    margin-left: 0;
+}
+
+/* Versão compacta do logo (apenas ícone) */
+.logo-compact {
+    width: 50px;
+    height: 50px;
+}
+
+.logo-compact .logo-text {
+    display: none;
+}
+
+/* Logo para fundos coloridos/escuros - versão branca */
+.logo-white .logo-text .logo-menu {
+    color: white;
+}
+
+.logo-white .logo-text .logo-express {
+    color: white;
+    opacity: 0.95;
+}
+
+.logo-white .logo-icon {
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo-white .logo-icon i {
+    color: var(--cor-primaria);
+}
+
+.logo-white .logo-line {
+    background-color: white;
+    opacity: 0.8;
+}
+
+/* ============================================
+   HEADER
+   ============================================ */
+.header {
+    background: white;
+    color: var(--cor-neutra);
+    padding: 1.5rem 0;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-bottom: 3px solid var(--cor-primaria);
+}
+
+.header-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 1rem;
+}
+
+.header-left {
+    text-align: left;
+}
+
+.header h1 {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-neutra);
+}
+
+.header p {
+    font-size: 1rem;
+    color: var(--cor-texto-claro);
+    margin: 0;
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.auth-actions {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+}
+
+.user-menu {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.welcome {
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--cor-neutra);
+}
+
+.user-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+/* ============================================
+   BOTÕES - Identidade Visual
+   ============================================ */
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 25px; /* Botões arredondados conforme identidade */
+    font-size: 1rem;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease; /* Transições suaves */
+    text-align: center;
+    font-family: 'Open Sans', 'Lato', sans-serif;
+}
+
+.btn-primary {
+    background: var(--cor-primaria); /* Vermelho-alaranjado */
+    color: white;
+    box-shadow: 0 4px 8px rgba(255, 87, 51, 0.3);
+}
+
+.btn-primary:hover {
+    background: #E64A2E;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 87, 51, 0.4);
+}
+
+.btn-secondary {
+    background: var(--cor-secundaria); /* Amarelo-dourado */
+    color: var(--cor-neutra);
+    box-shadow: 0 4px 8px rgba(255, 195, 0, 0.3);
+}
+
+.btn-secondary:hover {
+    background: #E6B000;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(255, 195, 0, 0.4);
+}
+
+.btn-outline {
+    background: transparent;
+    color: var(--cor-primaria);
+    border: 2px solid var(--cor-primaria);
+}
+
+.btn-outline:hover {
+    background: var(--cor-primaria);
+    color: white;
+    transform: translateY(-2px);
+}
+
+.btn-success {
+    background: var(--cor-complementar); /* Verde-limão */
+    color: white;
+    box-shadow: 0 4px 8px rgba(140, 198, 63, 0.3);
+}
+
+.btn-success:hover {
+    background: #7AB336;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(140, 198, 63, 0.4);
+}
+
+/* ============================================
+   MAIN CONTENT
+   ============================================ */
+.main {
+    padding: 3rem 0;
+    min-height: 60vh;
+    background-color: var(--cor-fundo);
+}
+
+/* ============================================
+   GRID DO CARDÁPIO
+   ============================================ */
+.menu-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 2rem;
+}
+
+/* ============================================
+   ITEM DO CARDÁPIO
+   ============================================ */
+.menu-item {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease; /* Transição suave */
+    cursor: pointer;
+    border: 2px solid transparent;
+}
+
+.menu-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(255, 87, 51, 0.2);
+    border-color: var(--cor-primaria);
+}
+
+.item-image {
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+}
+
+.item-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.menu-item:hover .item-image img {
+    transform: scale(1.05);
+}
+
+.no-image {
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(135deg, var(--cor-fundo), #E0E0E0);
+    color: var(--cor-texto-claro);
+    font-size: 3rem;
+}
+
+.item-content {
+    padding: 1.5rem;
+}
+
+.item-content h3 {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.4rem;
+    margin-bottom: 0.8rem;
+    color: var(--cor-neutra);
+}
+
+.description {
+    color: var(--cor-texto-claro);
+    margin-bottom: 1rem;
+    line-height: 1.6;
+    font-size: 0.95rem;
+}
+
+.price {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: var(--cor-primaria);
+    text-align: right;
+}
+
+/* ============================================
+   ESTADO VAZIO
+   ============================================ */
+.no-items {
+    text-align: center;
+    padding: 4rem 2rem;
+    color: var(--cor-texto-claro);
+    grid-column: 1 / -1;
+}
+
+.no-items i {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+    color: #ddd;
+}
+
+.no-items h3 {
+    font-family: 'Poppins', 'Montserrat', sans-serif;
+    font-weight: 700;
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--cor-texto-claro);
+}
+
+/* ============================================
+   FOOTER
+   ============================================ */
+.footer {
+    background: var(--cor-neutra);
+    color: white;
+    text-align: center;
+    padding: 2rem 0;
+    margin-top: 3rem;
+}
+
+.footer p {
+    margin-bottom: 1rem;
+}
+
+.admin-link {
+    color: var(--cor-secundaria);
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
+}
+
+.admin-link:hover {
+    color: var(--cor-primaria);
+}
+
+/* ============================================
+   MENSAGENS
+   ============================================ */
+.error {
+    background: var(--cor-primaria);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+.success {
+    background: var(--cor-complementar);
+    color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin: 1rem 0;
+    text-align: center;
+    font-weight: 500;
+}
+
+/* ============================================
+   RESPONSIVIDADE
+   ============================================ */
+@media (max-width: 768px) {
+    .header-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .header-left {
+        text-align: center;
+    }
+    
+    .header h1 {
+        font-size: 1.8rem;
+    }
+    
+    .logo-text .logo-menu,
+    .logo-text .logo-express {
+        font-size: 1.5rem;
+    }
+    
+    .auth-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.5rem;
+    }
+    
+    .auth-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .user-menu {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .user-actions {
+        flex-direction: column;
+        width: 100%;
+    }
+    
+    .user-actions .btn {
+        width: 100%;
+        justify-content: center;
+    }
+    
+    .menu-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .main {
+        padding: 2rem 0;
+    }
+    
+    .container {
+        padding: 0 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .header {
+        padding: 1.5rem 0;
+    }
+    
+    .header h1 {
+        font-size: 1.5rem;
+    }
+    
+    .logo-icon {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .logo-icon i {
+        font-size: 20px;
+    }
+    
+    .logo-text .logo-menu,
+    .logo-text .logo-express {
+        font-size: 1.3rem;
+    }
+    
+    .item-content {
+        padding: 1rem;
+    }
+    
+    .item-content h3 {
+        font-size: 1.2rem;
+    }
+    
+    .price {
+        font-size: 1.3rem;
+    }
+}
+
+/* ============================================
+   ANIMAÇÕES - Transições Suaves
+   ============================================ */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.menu-item {
+    animation: fadeInUp 0.6s ease forwards;
+}
+
+.menu-item:nth-child(1) { animation-delay: 0.1s; }
+.menu-item:nth-child(2) { animation-delay: 0.2s; }
+.menu-item:nth-child(3) { animation-delay: 0.3s; }
+.menu-item:nth-child(4) { animation-delay: 0.4s; }
+.menu-item:nth-child(5) { animation-delay: 0.5s; }
+.menu-item:nth-child(6) { animation-delay: 0.6s; }
+
+/* Flat Design - Ícones simples */
+.fas, .far, .fab {
+    font-style: normal;
+}
