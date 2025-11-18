@@ -116,7 +116,7 @@ if (!isset($_SESSION['cliente_logado'])) {
     <footer class="footer">
         <div class="container">
             <p>&copy; 2025 MenuExpress. Todos os direitos reservados.</p>
-            <a href="admin/" class="admin-link">Área Administrativa</a>
+            <a href="admin/" class="admin-link">Área Administrativa</a><br>
             <a href="faleconosco.php" class="admin-link">Fale Conosco</a>
         </div>
     </footer>

@@ -30,20 +30,22 @@ $cliente_logado = isset($_SESSION['cliente_logado']);
     <title>Fale Conosco - MenuExpress</title>
     <link rel="stylesheet" href="assets/css/style.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Poppins:wght@700&display=swap" rel="stylesheet">
     <style>
         /* Estilos básicos para o formulário de contato, para garantir que apareça bem */
         .contact-form-container {
             max-width: 600px;
             margin: 3rem auto;
             padding: 2rem;
-            background-color: #fff;
+            background-color: #F8F8F8; /* Cor Fundo: Branco/cinza-claro */
             border-radius: 8px;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
         .contact-form-container h2 {
+            font-family: 'Poppins', sans-serif;
             text-align: center;
             margin-bottom: 1.5rem;
-            color: #333;
+            color: #2C2C2C; /* Cor Neutra: Cinza-escuro */
         }
         .form-group {
             margin-bottom: 1rem;
@@ -52,7 +54,8 @@ $cliente_logado = isset($_SESSION['cliente_logado']);
             display: block;
             margin-bottom: 0.5rem;
             font-weight: bold;
-            color: #555;
+            font-family: 'Open Sans', sans-serif;
+            color: #2C2C2C; /* Cor Neutra: Cinza-escuro */
         }
         .form-group input[type="text"],
         .form-group input[type="email"],
@@ -63,6 +66,7 @@ $cliente_logado = isset($_SESSION['cliente_logado']);
             border-radius: 4px;
             box-sizing: border-box;
             font-size: 1rem;
+            font-family: 'Open Sans', sans-serif;
         }
         .form-group textarea {
             resize: vertical;
@@ -72,16 +76,17 @@ $cliente_logado = isset($_SESSION['cliente_logado']);
             display: block;
             width: 100%;
             padding: 0.75rem;
-            background-color: #007bff; /* Cor primária, assumindo um padrão */
+            background-color: #FF5733; /* Cor Primária: Vermelho-alaranjado */
             color: white;
             border: none;
             border-radius: 4px;
             font-size: 1.1rem;
+            font-family: 'Poppins', sans-serif;
             cursor: pointer;
             transition: background-color 0.3s ease;
         }
         .btn-submit:hover {
-            background-color: #0056b3;
+            background-color: #E04E2D; /* Um tom mais escuro para o hover */
         }
         .alert {
             padding: 1rem;
